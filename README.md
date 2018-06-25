@@ -43,7 +43,7 @@ Run npm install, to install all the packages and dependencies.
 ```
 Run npm lint, to look out for linting errors.
 ```
-    ../sCopsTask > npm lint
+    ../sCopsTask > npm run lint
 ```
 Run npm start, to start the app. App will be served at port: 3001.
 ```
