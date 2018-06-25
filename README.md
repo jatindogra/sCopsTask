@@ -72,7 +72,7 @@ There are three API's as mentioned below. You can hit api endpoints at http://lo
         "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6I"
     }
     ```
-- ***POST /jsonPatch***
+- ***POST /jsonpatch***
     This api applies a patch operations on the json object.
     Request body is an object, that contains two parameters `json` and `patch`. Both the parameters are required.
     ```
