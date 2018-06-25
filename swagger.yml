@@ -1,0 +1,96 @@
+openapi: 3.0.1
+info:
+  title: sCops Test API
+  description: Authentication required for two apis, `/jsonpatch` and `/resize`. Use `/auth` api to generate accessToken. Use the accessToken obtained to authenticate. If left empty, requests will be made as a public.
+  version: "1.0"
+servers:
+  - url: 'http://localhost:3001'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+security:
+  - ApiKeyAuth: []
+paths:
+  /auth:
+    post:
+      description: Use this api to generate accessToken for authenticating api requests. Public api doesn't require authorization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                password:
+                  type: string
+                username:
+                  type: string
+            examples:
+              '0':
+                value: '{"username": "jatin", "password": "jatin"}'
+      responses:
+        '201':
+          description: An object containing generated accessToken.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+              examples: {}
+  /jsonpatch:
+    post:
+      description: Use this api to apply json-patch to an object. Api requires authorization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                json:
+                  type: object
+                  properties:
+                    foo:
+                      type: string
+                    baz:
+                      type: string
+                patch:
+                  type: array
+                  items:
+                    oneOf:
+                      - type: object
+                        properties:
+                          op:
+                            type: string
+                          path:
+                            type: string
+                          value:
+                            type: string
+            examples:
+              '0':
+                value: "{\n\t\"json\": {\n\t  \"baz\": \"qux\",\n\t  \"foo\": \"bar\"\n\t},\n\t\"patch\": [\n\t  { \"op\": \"replace\", \"path\": \"/baz\", \"value\": \"boo\" },\n\t  { \"op\": \"add\", \"path\": \"/hello\", \"value\": [\"world\"] },\n\t  { \"op\": \"remove\", \"path\": \"/foo\"}\n\t]\n}"
+      responses:
+        '201':
+          description: An object containing the patched json document. Api requires authorization.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+              examples: {}
+  /resize:
+    post:
+      description: Use this api to resize the image to 50x50.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                imageUrl:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "imageUrl": "https://i.ytimg.com/vi/YjqDhCGaR4g/maxresdefault.jpg"
+                  }
+      responses:
+        '201':
+          description: An image with size 50x50.
