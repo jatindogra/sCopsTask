@@ -39,19 +39,19 @@ Please make sure you have node version 8 or above to support ES6 syntax.
 
 Run npm install, to install all the packages and dependencies.
 ```
-    ../taskSocialCops > npm install
+    ../sCopsTask > npm install
 ```
 Run npm lint, to look out for linting errors.
 ```
-    ../taskSocialCops > npm lint
+    ../sCopsTask > npm lint
 ```
 Run npm start, to start the app. App will be served at port: 3001.
 ```
-    ../taskSocialCops > npm start
+    ../sCopsTask > npm start
 ```
 Run npm test, to run the test cases along with code coverage reports.
 ```
-    ../taskSocialCops > npm test
+    ../sCopsTask > npm test
 ```
 
 **API Endpoints**
